@@ -4,6 +4,7 @@ import type { RecursiveKeyOf } from "../../ts/recursiveKeyOf";
 import type { Operation } from "./QueryInputs";
 import QueryInputs from "./QueryInputs";
 import TemtemAvatar from "./TemtemAvatar";
+import TemtemCard from "./TemtemCard";
 import './TemtemList.sass'
 import { calculate, MathOperator } from "./TemtemList.utils";
 type Props = {
@@ -22,7 +23,7 @@ const numberFields: RecursiveKeyOf<Temtem>[] = [
 export default function TemtemList(props: Props) {
 
   const { temtems } = props
-  const [operation, setOperation] = useState<Operation>([numberFields[0], MathOperator.sum, numberFields[0]]);
+  const [operation, setOperation] = useState<Operation>([numberFields[0], MathOperator.mult, 1]);
 
   const temtemFiltered = useMemo(() => {
     var filtered = temtems
@@ -33,6 +34,9 @@ export default function TemtemList(props: Props) {
   return <div className="temtem-list">
     <div>
       <QueryInputs operation={operation} onChange={setOperation} fields={{}}></QueryInputs>
+    </div>
+    <div className="main">
+      <TemtemCard temtem={temtemFiltered[0]}></TemtemCard>
     </div>
     <div className="container">
       {temtemFiltered.map(temtem => <TemtemAvatar temtem={temtem} key={temtem.number} />)}
