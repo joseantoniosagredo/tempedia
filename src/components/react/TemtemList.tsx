@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from "react";
 import type { Temtem } from "../../ts"
 import { getFieldFromString } from "../../utils/objectUtils";
 import TemtemAvatar from "./TemtemAvatar";
-import './temtemList.sass'
+import './TemtemList.sass'
 import { comparator, fields, OperatorType } from "./TemtemList.utils";
 type Props = {
   temtems: Temtem[]
