@@ -6,7 +6,13 @@ $size: 60px
   flex-direction: column
   align-items: center
   width: $size
+  padding: 0.15rem
+  cursor: pointer
+  &:hover
+    .avatar
+      transform: scale(1.1)
   .avatar
+    transition: transform .2s ease-in-out
     width: $size
     height: $size
     border-radius: 100%

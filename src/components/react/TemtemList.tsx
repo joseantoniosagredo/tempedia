@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import type { Temtem } from "../../ts"
 import type { RecursiveKeyOf } from "../../ts/recursiveKeyOf";
 import type { Operation } from "./QueryInputs";
@@ -24,22 +24,25 @@ export default function TemtemList(props: Props) {
 
   const { temtems } = props
   const [operation, setOperation] = useState<Operation>([numberFields[0], MathOperator.mult, 1]);
-
+  const [selected, setSelected] = useState(0);
   const temtemFiltered = useMemo(() => {
     var filtered = temtems
     filtered.sort((a, b) => calculate(b, operation) - calculate(a, operation))
     return filtered
   }, [operation, temtems])
-
+  const handleChangeQuery = useCallback((operation: Operation) => {
+    setOperation(operation)
+    setSelected(0)
+  }, [setSelected, setOperation])
   return <div className="temtem-list">
     <div>
-      <QueryInputs operation={operation} onChange={setOperation} fields={{}}></QueryInputs>
+      <QueryInputs operation={operation} onChange={handleChangeQuery} fields={{}}></QueryInputs>
     </div>
     <div className="main">
-      <TemtemCard temtem={temtemFiltered[0]}></TemtemCard>
+      <TemtemCard temtem={temtemFiltered[selected]}></TemtemCard>
     </div>
     <div className="container">
-      {temtemFiltered.map(temtem => <TemtemAvatar temtem={temtem} key={temtem.number} />)}
+      {temtemFiltered.map((temtem, index) => <TemtemAvatar onClick={() => setSelected(index)} temtem={temtem} key={temtem.number} />)}
     </div>
   </div>
 }
