@@ -11,8 +11,12 @@ $size: 60px
   &:hover
     .avatar
       transform: scale(1.1)
+      border-color: var(--primary-color)
+  &.selected
+    .avatar
+      border-color: var(--secondary-color)
   .avatar
-    transition: transform .2s ease-in-out
+    transition: all .2s ease-in-out
     width: $size
     height: $size
     border-radius: 100%

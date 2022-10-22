@@ -42,7 +42,9 @@ export default function TemtemList(props: Props) {
       <TemtemCard temtem={temtemFiltered[selected]}></TemtemCard>
     </div>
     <div className="container">
-      {temtemFiltered.map((temtem, index) => <TemtemAvatar onClick={() => setSelected(index)} temtem={temtem} key={temtem.number} />)}
+      {temtemFiltered.map((temtem, index) =>
+        <TemtemAvatar onClick={() => setSelected(index)} temtem={temtem} key={temtem.number} selected={index === selected} />
+      )}
     </div>
   </div>
 }
