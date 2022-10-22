@@ -18,7 +18,7 @@ const stats: { field: RecursiveKeyOf<Temtem>, label: string }[] = [
 ]
 export default function TemtemCard(props: Props) {
   const { temtem } = props
-  return <div className="temtem-card">
+  return <div className="temtem-card surface-2">
     <div className="image-wrapper left">
       <img src={temtem.wikiRenderStaticUrl} alt={temtem.name} />
     </div>

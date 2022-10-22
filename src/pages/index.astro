@@ -9,9 +9,9 @@ const data:Temtem[] = await response.json()
 ---
 
 <Layout title="Tempedia">
-	<main>
-		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
-		<p class="instructions">
+	<main class="surface-1">
+		<h1>Welcome to <span class="text-gradient">Tempedia</span></h1>
+		<p class="instructions surface-2dp">
 			To get started, open the directory <code>src/pages</code> in your project.<br />
 			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
 		</p>
@@ -20,8 +20,8 @@ const data:Temtem[] = await response.json()
 </Layout>
 <style lang="sass">
 main
-	margin: auto
-	padding: 1.5rem
+	margin: auto !important
+	padding: 1.5rem !important
 	max-width: 60ch
 	.wrapper
 		display: flex
@@ -45,7 +45,6 @@ main
 		line-height: 1.6
 		margin: 1rem 0
 		border: 1px solid rgba(var(--accent), 25%)
-		background-color: white
 		padding: 1rem
 		border-radius: 0.4rem
 
