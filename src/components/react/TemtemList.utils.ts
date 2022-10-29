@@ -100,6 +100,10 @@ export function math(
 }
 
 export function calculate(temtem: Temtem, operation: Operation): number {
+  if (!Array.isArray(operation))
+    return isNumber(operation)
+      ? operation
+      : (getFieldFromString(temtem, operation as any)[0] as number);
   const getData = (index: 0 | 2) =>
     Array.isArray(operation[index])
       ? calculate(temtem, operation[index] as Operation)

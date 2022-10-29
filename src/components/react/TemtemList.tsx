@@ -11,6 +11,7 @@ type Props = {
   temtems: Temtem[]
 }
 const numberFields: RecursiveKeyOf<Temtem>[] = [
+  "number",
   "stats.hp",
   "stats.atk",
   "stats.def",
@@ -23,19 +24,31 @@ const numberFields: RecursiveKeyOf<Temtem>[] = [
 export default function TemtemList(props: Props) {
 
   const { temtems } = props
-  const [operation, setOperation] = useState<Operation>([numberFields[0], MathOperator.mult, 1]);
+  const [operation, setOperation] = useState<Operation>('stats.hp');
   const [selected, setSelected] = useState(0);
+  const [search, setSearch] = useState('');
+
   const temtemFiltered = useMemo(() => {
     var filtered = temtems
-    filtered.sort((a, b) => calculate(b, operation) - calculate(a, operation))
+    if (search) filtered = filtered.filter(temtem => temtem.name.toLowerCase().includes(search.toLowerCase()))
+    if (operation) filtered.sort((a, b) => calculate(b, operation) - calculate(a, operation))
     return filtered
-  }, [operation, temtems])
+  }, [operation, temtems, search])
+
   const handleChangeQuery = useCallback((operation: Operation) => {
     setOperation(operation)
     setSelected(0)
   }, [setSelected, setOperation])
+  const handleClear = useCallback(() => {
+    setOperation('number')
+    setSearch('')
+  }, [setOperation, setSearch])
   return <div className="temtem-list">
-    <div>
+    <div className="header-filter">
+      <div className="top">
+        <input value={search} onChange={e => setSearch(e.target.value)} />
+        <button onClick={handleClear}>Clear</button>
+      </div>
       <QueryInputs operation={operation} onChange={handleChangeQuery} fields={{}}></QueryInputs>
     </div>
     <div className="main">

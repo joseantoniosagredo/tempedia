@@ -1,0 +1,7 @@
+@use "sass:map"
+
+$surface-elevation: (1:0.05,2:0.07,3:.08,4:.09,6:.11,8:.12,12:.14,16:.15,24:.16)
+
+@function elevation-color($elevation)
+  $opacity: map.get($surface-elevation,$elevation)
+  @return rgba(255, 255, 255, $opacity)
