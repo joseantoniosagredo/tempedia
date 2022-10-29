@@ -1,6 +1,7 @@
 @import '../../styles/mixins/media-query.sass'
 @import '../../styles/mixins/m-ellipsis'
 $size: 60px
+$size-mobile: 80px
 .temtem-avatar
   display: flex
   flex-direction: column
@@ -8,6 +9,8 @@ $size: 60px
   width: $size
   padding: 0.15rem
   cursor: pointer
+  @include mobile
+    width: $size-mobile
   &:hover
     .avatar
       transform: scale(1.1)
@@ -22,8 +25,8 @@ $size: 60px
     border-radius: 100%
     border: 1px solid
     @include mobile
-      width: 50px
-      height: 50px
+      width: $size-mobile
+      height: $size-mobile
   .name
     width: 100%
     overflow: hidden

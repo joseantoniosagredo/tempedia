@@ -21,6 +21,7 @@ const { title } = Astro.props;
 	</body>
 </html>
 <style is:global lang="sass">
+@import "../styles/theme.sass"
 html
   font-family: system-ui, sans-serif
   background-color: var(--background)
@@ -36,6 +37,9 @@ header
   display: flex
   align-items: center
   position: sticky
+  @include mobile
+    height: 50px
+
 svg
   text
     fill: var(--on-background)

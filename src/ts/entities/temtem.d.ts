@@ -1,7 +1,7 @@
 export interface Temtem {
   number: number;
   name: string;
-  types?: string[] | null;
+  types?: TemtemType[];
   portraitWikiUrl: string;
   lumaPortraitWikiUrl: string;
   wikiUrl: string;
@@ -40,6 +40,19 @@ export interface Stats {
   spdef: number;
   total: number;
 }
+export type TemtemType =
+  | "Toxic"
+  | "Crystal"
+  | "Melee"
+  | "Digital"
+  | "Mental"
+  | "Electric"
+  | "Nature"
+  | "Fire"
+  | "Water"
+  | "Earth"
+  | "Wind"
+  | "Neutral";
 export interface Details {
   height: Height;
   weight: Weight;
