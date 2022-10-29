@@ -53,7 +53,7 @@ export default function QueryInputs(props: Props) {
       <select onChange={e => handleChange(0)(e.target.value)} value={operation}>
         {numberFields.map(e => <option value={e} key={e}>{e}</option>)}
       </select>
-      <button onClick={changeOperationValue(0)}>Query</button>
+      <button onClick={changeOperationValue(0)}>Advance</button>
     </div>
   return <div className="query-inputs">
     <div className="option-wrapper">

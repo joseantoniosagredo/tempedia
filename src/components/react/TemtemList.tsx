@@ -45,11 +45,15 @@ export default function TemtemList(props: Props) {
   }, [setOperation, setSearch])
   return <div className="temtem-list">
     <div className="header-filter">
+      <div className="subtitle">filter</div>
       <div className="top">
         <input value={search} onChange={e => setSearch(e.target.value)} />
         <button onClick={handleClear}>Clear</button>
       </div>
-      <QueryInputs operation={operation} onChange={handleChangeQuery} fields={{}}></QueryInputs>
+      <div className="subtitle">sort</div>
+      <div className="bottom">
+        <QueryInputs operation={operation} onChange={handleChangeQuery} fields={{}}></QueryInputs>
+      </div>
     </div>
     <div className="main">
       <TemtemCard temtem={temtemFiltered[selected]}></TemtemCard>

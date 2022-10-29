@@ -2,32 +2,20 @@
 .temtem-list
   display: flex
   flex-direction: column
-  button
-    padding: 5px 10px
-    border: 1px solid var(--primary-color)
-    color: var(--primary-color)
-    background-color: transparent
-    border-radius: 5px
 
   .header-filter
     padding: 5px
-    width: 100%
     border-radius: 5px
     background-color: elevation-color(1)
+    .subtitle
+      font-size: .7em
+      color: #eee
     .top
       display: flex
+      align-items: center
+      gap: 5px
       input
         flex: 1 1 100%
-    input,
-    select
-      color: var(--on-surface)
-      background-color: elevation-color(2)
-      padding: 6px 10px
-      margin: 8px 0
-      display: inline-block
-      border: 1px solid #ccc
-      border-radius: 4px
-      box-sizing: border-box
   .main
     margin: 10px 0px
   .inputs
