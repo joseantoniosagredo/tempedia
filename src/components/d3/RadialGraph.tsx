@@ -4,6 +4,7 @@ import type { Temtem } from '../../ts/index.js'
 import { drawRadialGraph } from './d3RadialGraph.js'
 type Props = {
   temtem: Temtem
+  className?: string
 }
 export default function RadialGraph(props: Props) {
   const { temtem } = props
@@ -17,7 +18,7 @@ export default function RadialGraph(props: Props) {
     })
   }, [temtem])
 
-  return <svg ref={ref}>
+  return <svg className={props.className} ref={ref}>
 
   </svg>
 }

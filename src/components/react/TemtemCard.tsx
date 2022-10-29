@@ -35,7 +35,7 @@ export default function TemtemCard(props: Props) {
             </tr>)}
           </tbody>
         </table>
-        <RadialGraph temtem={temtem} />
+        <RadialGraph className="radial-graph" temtem={temtem} />
       </div>
     </div>
   </div>
