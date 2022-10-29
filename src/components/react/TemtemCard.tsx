@@ -1,6 +1,7 @@
 import type { Temtem } from "../../ts"
 import type { RecursiveKeyOf } from "../../ts/recursiveKeyOf"
 import { getFieldFromString } from "../../utils/objectUtils"
+import RadialGraph from "../d3/RadialGraph"
 import './TemtemCard.sass'
 type Props = {
   temtem: Temtem
@@ -25,12 +26,17 @@ export default function TemtemCard(props: Props) {
     <div className="right">
 
       <div className="name">{temtem.name}</div>
-      <table className="stats">
-        {stats.map(s => <tr>
-          <th>{s.label}</th>
-          <td>{getFieldFromString(temtem, s.field)}</td>
-        </tr>)}
-      </table>
+      <div className="info">
+        <table className="stats">
+          <tbody>
+            {stats.map(s => <tr>
+              <th>{s.label}</th>
+              <td>{getFieldFromString(temtem, s.field)}</td>
+            </tr>)}
+          </tbody>
+        </table>
+        <RadialGraph temtem={temtem} />
+      </div>
     </div>
   </div>
 }
