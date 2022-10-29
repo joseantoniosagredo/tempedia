@@ -15,11 +15,25 @@ $size: 150px
   .right
     flex: 1 1 100%
   .left
+    width: 100%
     display: flex
     align-items: center
     justify-content: center
+    flex-direction: column
+    .bottom-img
+      display: flex
+      .types
+        display: flex
+        .type
+          width: 25px
+          height: 25px
     img.contain
       object-fit: cover
+  .right
+    table
+      font-size: .8rem
+      th
+        padding-right: 10px
 
   .image-wrapper
     width: $size
