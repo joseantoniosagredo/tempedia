@@ -116,6 +116,7 @@ export function drawRadialGraph (
     .enter()
     .append('text')
     .attr('class', 'text')
+    .attr('opacity', 0)
     .text(d => d)
 
   texts
@@ -126,7 +127,6 @@ export function drawRadialGraph (
   texts = texts.merge(textsEnter)
   texts
     .attr('transform', d => `translate(${xCart(max, d)},${yCart(max, d)})`)
-    .attr('opacity', 0)
     .transition()
     .attr('opacity', 1)
 
