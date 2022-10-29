@@ -10,11 +10,7 @@ const data:Temtem[] = await response.json()
 
 <Layout title="Tempedia">
 	<main class="surface-1">
-		<h1>Welcome to <span class="text-gradient">Tempedia</span></h1>
-		<p class="instructions surface-2dp">
-			To get started, open the directory <code>src/pages</code> in your project.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-		</p>
+		<h1 >Welcome to <span class="text-gradient">Tempedia</span></h1>	
 		<TemtemList client:load temtems={data}/>
 	</main>
 </Layout>
