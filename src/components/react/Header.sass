@@ -1,0 +1,21 @@
+@import '../../styles/theme'
+.header
+  top: 0
+  background-color: var(--primary-color)
+  height: 30px
+  display: flex
+  align-items: center
+  position: sticky
+  width: calc(100vw - 40px)
+  padding: 0px 20px
+  @include mobile
+    height: 50px
+  .title
+    flex: 1 1 100%
+  .burger
+    display: none
+    @include mobile
+      display: block
+  .burguer-header
+    height: 30px
+  
