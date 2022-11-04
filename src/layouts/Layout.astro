@@ -48,10 +48,11 @@ body
     position: absolute
     overflow-y: auto
     z-index: 1
-    transition: all .2s ease-in-out
     background-color: var(--background)
     border-radius: 0px
     transform-origin: top right
+    @include mobile
+      transition: all .2s ease-in-out
     &.open-header
       transform: translate(-70vw,5%) scale(.9)
 code
