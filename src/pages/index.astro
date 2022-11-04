@@ -1,11 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
 import type { Temtem } from '../ts';
 import TemtemList from '../components/react/TemtemList';
-
-const response = await fetch('https://temtem-api.mael.tech/api/temtems')
-const data:Temtem[] = await response.json()
+import temtems from '../../public/api/temtems.json'
+// const response = await fetch('https://temtem-api.mael.tech/api/temtems')
+const data:Temtem[] = temtems as Temtem[]
 ---
 
 <Layout title="Tempedia">

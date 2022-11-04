@@ -6,6 +6,7 @@ export interface Temtem {
   lumaPortraitWikiUrl: string;
   wikiUrl: string;
   stats: Stats;
+  trainStats: Stats;
   traits?: string[] | null;
   details: Details;
   techniques?: TechniquesEntity[] | null;

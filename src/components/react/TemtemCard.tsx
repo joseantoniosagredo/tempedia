@@ -1,4 +1,5 @@
 import type { Temtem } from "../../ts"
+import type { Stats } from "../../ts/entities/temtem"
 import type { RecursiveKeyOf } from "../../ts/recursiveKeyOf"
 import { getFieldFromString } from "../../utils/objectUtils"
 import RadialGraph from "../d3/RadialGraph"
@@ -8,15 +9,15 @@ type Props = {
   temtem: Temtem
 }
 
-const stats: { field: RecursiveKeyOf<Temtem>, label: string }[] = [
-  { field: "stats.hp", label: "HP" },
-  { field: "stats.sta", label: "Stamina" },
-  { field: "stats.atk", label: "Atack" },
-  { field: "stats.spatk", label: "Sp Atack" },
-  { field: "stats.spd", label: "Speed" },
-  { field: "stats.def", label: "Defense" },
-  { field: "stats.spdef", label: "Sp Defense" },
-  { field: "stats.total", label: "Total" },
+const stats: { field: keyof Stats, label: string }[] = [
+  { field: "hp", label: "HP" },
+  { field: "sta", label: "Stamina" },
+  { field: "atk", label: "Atack" },
+  { field: "spatk", label: "Sp Atack" },
+  { field: "spd", label: "Speed" },
+  { field: "def", label: "Defense" },
+  { field: "spdef", label: "Sp Defense" },
+  { field: "total", label: "Total" },
 ]
 export default function TemtemCard(props: Props) {
   const { temtem } = props
@@ -35,9 +36,15 @@ export default function TemtemCard(props: Props) {
       <div className="info">
         <table className="stats">
           <tbody>
+            <tr>
+              <th>stat</th>
+              <th>base</th>
+              <th>TV</th>
+            </tr>
             {stats.map(s => <tr>
               <th>{s.label}</th>
-              <td>{getFieldFromString(temtem, s.field)}</td>
+              <td>{getFieldFromString(temtem, 'stats.' + s.field as any)}</td>
+              <td>{getFieldFromString(temtem, 'trainStats.' + s.field as any)}</td>
             </tr>)}
           </tbody>
         </table>
