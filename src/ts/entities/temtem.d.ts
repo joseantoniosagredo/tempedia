@@ -1,3 +1,5 @@
+import type { Technique } from "./technique";
+
 export interface Temtem {
   number: number;
   name: string;
@@ -9,7 +11,7 @@ export interface Temtem {
   trainStats: Stats;
   traits?: string[] | null;
   details: Details;
-  techniques?: TechniquesEntity[] | null;
+  techniques?: Technique[] | null;
   trivia?: string[] | null;
   evolution: Evolution;
   wikiPortraitUrlLarge: string;
