@@ -10,6 +10,12 @@ This project has been created with [Astro](https://astro.build/). I think this i
 * It build weight is vey low
 * Compatible with Vercel
 
+### Technology used
+* Astro
+* React
+* Typescript
+* D3
+
 ## Data from:
 * (Api from Maael)[https://temtem-api.mael.tech/]
 * Trained stats from (Tortelines Garden)[https://www.tortenites-garden.com/]
