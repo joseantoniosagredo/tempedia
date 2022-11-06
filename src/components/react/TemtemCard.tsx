@@ -1,7 +1,7 @@
 import type { Temtem } from "../../ts"
 import type { Stats } from "../../ts/entities/temtem"
-import type { RecursiveKeyOf } from "../../ts/recursiveKeyOf"
 import { getFieldFromString } from "../../utils/objectUtils"
+import { calculateStat } from "../../utils/temtemFunctions"
 import RadialGraph from "../d3/RadialGraph"
 import './TemtemCard.sass'
 import Type from "./TemtemType"
@@ -35,14 +35,18 @@ export default function TemtemCard(props: Props) {
 
       <div className="info">
         <table className="stats">
-          <tbody>
+          <thead>
             <tr>
               <th>stat</th>
+              <th>value</th>
               <th>base</th>
               <th>TV</th>
             </tr>
+          </thead>
+          <tbody>
             {stats.map(s => <tr>
               <th>{s.label}</th>
+              <td>{calculateStat(temtem, s.field)}</td>
               <td>{getFieldFromString(temtem, 'stats.' + s.field as any)}</td>
               <td>{getFieldFromString(temtem, 'trainStats.' + s.field as any)}</td>
             </tr>)}

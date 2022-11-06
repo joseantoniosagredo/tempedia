@@ -1,12 +1,13 @@
 import { useCallback, useMemo, useState } from "react";
 import type { Temtem } from "../../ts"
 import type { RecursiveKeyOf } from "../../ts/recursiveKeyOf";
+import OneShotList from "./OneShotList";
 import type { Operation } from "./QueryInputs";
 import QueryInputs from "./QueryInputs";
 import TemtemAvatar from "./TemtemAvatar";
 import TemtemCard from "./TemtemCard";
 import './TemtemList.sass'
-import { calculate, MathOperator } from "./TemtemList.utils";
+import { calculate } from "./TemtemList.utils";
 type Props = {
   temtems: Temtem[]
 }
@@ -39,10 +40,12 @@ export default function TemtemList(props: Props) {
     setOperation(operation)
     setSelected(0)
   }, [setSelected, setOperation])
+
   const handleClear = useCallback(() => {
     setOperation('number')
     setSearch('')
   }, [setOperation, setSearch])
+
   return <div className="temtem-list">
     <div className="header-filter">
       <div className="subtitle">filter</div>
@@ -57,6 +60,9 @@ export default function TemtemList(props: Props) {
     </div>
     <div className="main">
       <TemtemCard temtem={temtemFiltered[selected]}></TemtemCard>
+    </div>
+    <div className="surface-2">
+      <OneShotList temtemList={temtemFiltered} temtem={temtemFiltered[selected]} />
     </div>
     <div className="container">
       {temtemFiltered.map((temtem, index) =>

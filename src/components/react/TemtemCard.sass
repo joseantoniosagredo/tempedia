@@ -1,5 +1,5 @@
 @import '../../styles/mixins/media-query'
-$size: 150px
+$size: 200px
 .temtem-card
   display: flex
   transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1)
@@ -32,11 +32,17 @@ $size: 150px
   .right
     table
       font-size: .8rem
-      th
-        padding-right: 10px
+      border-collapse: collapse
+      tbody
+        td,th
+          text-align: left
+        th
+          padding-right: 10px
+      thead
+        th
+          border-bottom: 1px solid
 
   .image-wrapper
-    width: $size
     img
       height: $size
   .info
