@@ -19,7 +19,13 @@ This project has been created with [Astro](https://astro.build/). I think this i
 ## Data from:
 * (Api from Maael)[https://temtem-api.mael.tech/]
 * Trained stats from (Tortelines Garden)[https://www.tortenites-garden.com/]
-* 
+
+### Future feature
+* Counter List
+* Filter by techniques
+* Sinergies
+* Compare
+* Advance Query in string mode
 
 ## Astro Readme
 ### 🚀 Project Structure
