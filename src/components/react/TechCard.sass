@@ -1,0 +1,19 @@
+.tech-card
+  position: relative
+  padding: 1em
+  overflow: hidden
+  .tech-card-color-wrapper
+    display: flex
+    position: absolute
+    z-index: -1
+    right: 0
+    top: 0
+    gap: 10px
+    justify-content: right
+    .hold-line
+      transform: rotate(-45deg) translateY(-50%)
+      transform-origin: top left
+      height: 2000px
+      width: 5px
+      &:last-child
+        width: 30px

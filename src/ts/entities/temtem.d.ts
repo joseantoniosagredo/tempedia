@@ -3,7 +3,7 @@ import type { Technique } from "./technique";
 export interface Temtem {
   number: number;
   name: string;
-  types?: TemtemType[];
+  types: TemtemType[];
   portraitWikiUrl: string;
   lumaPortraitWikiUrl: string;
   wikiUrl: string;

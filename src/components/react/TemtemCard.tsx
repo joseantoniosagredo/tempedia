@@ -17,7 +17,7 @@ const stats: { field: keyof Stats, label: string }[] = [
   { field: "spd", label: "Speed" },
   { field: "def", label: "Defense" },
   { field: "spdef", label: "Sp Defense" },
-  { field: "total", label: "Total" },
+  // { field: "total", label: "Total" },
 ]
 export default function TemtemCard(props: Props) {
   const { temtem } = props
@@ -25,7 +25,7 @@ export default function TemtemCard(props: Props) {
     <div className="image-wrapper left">
       <div className="bottom-img">
         <div className="types">
-          {temtem.types?.map(type => <Type className="type" type={type}></Type>)}
+          {temtem.types?.map(type => <Type className="type" type={type} key={type}></Type>)}
         </div>
         <div className="name">{temtem.name}</div>
       </div>
@@ -44,7 +44,7 @@ export default function TemtemCard(props: Props) {
             </tr>
           </thead>
           <tbody>
-            {stats.map(s => <tr>
+            {stats.map(s => <tr key={s.field}>
               <th>{s.label}</th>
               <td>{calculateStat(temtem, s.field)}</td>
               <td>{getFieldFromString(temtem, 'stats.' + s.field as any)}</td>

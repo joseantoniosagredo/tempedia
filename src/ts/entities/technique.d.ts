@@ -1,7 +1,9 @@
+import type { TemtemType } from "./temtem";
+
 export interface Technique {
   name: string;
   wikiUrl: string;
-  type: string;
+  type: TemtemType;
   class: string;
   classIcon: string;
   damage: number;
@@ -10,7 +12,7 @@ export interface Technique {
   priority: string;
   priorityIcon: string;
   synergy: string;
-  synergyEffects?: (SynergyEffectsEntity)[] | null;
+  synergyEffects?: SynergyEffectsEntity[] | null;
   targets: string;
   description: string;
 }

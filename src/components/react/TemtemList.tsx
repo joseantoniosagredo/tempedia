@@ -36,6 +36,8 @@ export default function TemtemList(props: Props) {
     return filtered
   }, [operation, temtems, search])
 
+  const temtemSelected = useMemo<Temtem | undefined>(() => temtemFiltered[selected], [selected, temtemFiltered])
+
   const handleChangeQuery = useCallback((operation: Operation) => {
     setOperation(operation)
     setSelected(0)
@@ -59,10 +61,10 @@ export default function TemtemList(props: Props) {
       </div>
     </div>
     <div className="main">
-      <TemtemCard temtem={temtemFiltered[selected]}></TemtemCard>
+      {temtemSelected && <TemtemCard temtem={temtemSelected}></TemtemCard>}
     </div>
     <div className="surface-2">
-      <OneShotList temtemList={temtemFiltered} temtem={temtemFiltered[selected]} />
+      {temtemSelected && <OneShotList temtemList={temtems} temtem={temtemSelected} />}
     </div>
     <div className="container">
       {temtemFiltered.map((temtem, index) =>
