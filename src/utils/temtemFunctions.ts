@@ -137,3 +137,11 @@ export function oneShotTemtems(
     })
     .filter((e) => e.countTech);
 }
+export function isLastEvolution(temtem: Temtem) {
+  return (
+    !temtem.evolution.evolves ||
+    temtem.evolution.evolutionTree?.reduce((max, et) =>
+      Math.max(max.stage, et.stage) === max.stage ? max : et
+    ).stage === temtem.evolution.stage
+  );
+}

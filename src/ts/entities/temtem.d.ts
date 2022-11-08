@@ -74,8 +74,43 @@ export interface TechniquesEntity {
   levels: number;
 }
 export interface Evolution {
+  stage: number;
+  evolutionTree?: EvolutionTreeEntity[] | null;
   evolves: boolean;
+  type: string;
+  from: From;
+  to?: null;
+  number: number;
+  name: string;
+  level: number;
+  trading: boolean;
+  traits?: string[] | null;
+  traitMapping: TraitMapping;
 }
+export interface EvolutionTreeEntity {
+  stage: number;
+  number: number;
+  name: string;
+  level: number;
+  type: string;
+  trading: boolean;
+  traits?: string[] | null;
+  traitMapping: TraitMapping;
+}
+export interface TraitMapping {
+  [key: string]: string;
+}
+export interface From {
+  stage: number;
+  number: number;
+  name: string;
+  level: number;
+  type: string;
+  trading: boolean;
+  traits?: string[] | null;
+  traitMapping: TraitMapping;
+}
+
 export interface LocationsEntity {
   location: string;
   place: string;
