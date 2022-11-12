@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react"
-import type { Technique, Temtem } from "../../ts"
-import type { Stats, TechniquesEntity } from "../../ts/entities/temtem"
-import { calculateStat, damage, getMultiply, getMultiplyArray, isLastEvolution, oneShotTemtems } from "../../utils/temtemFunctions"
+import type { Temtem } from "../../ts"
+import type { Stats } from "../../ts/entities/temtem"
+import { isLastEvolution, counterTemtems } from "../../utils/temtemFunctions"
 import TemtemAvatar from "./TemtemAvatar"
 import "./OneShotList.sass"
 import TechCard from "./TechCard"
@@ -10,7 +10,7 @@ type Props = {
   temtemList: Temtem[]
 }
 
-export default function OneShotList(props: Props) {
+export default function CounterList(props: Props) {
   const { temtem, temtemList } = props
   const [hold, setHold] = useState(false);
   const [fullHP, setFullHP] = useState(false);
@@ -19,8 +19,8 @@ export default function OneShotList(props: Props) {
   const onShotTems = useMemo(() => {
     var stats: Partial<Stats> = {}
     if (fullHP) stats.hp = 500
-    var result = oneShotTemtems(temtem, temtemList, {}, stats)
-    if (hold) result = result.filter(t => t.countTechs?.some(tech => tech.hold === 0))
+    var result = counterTemtems(temtem, temtemList, {}, stats)
+    if (hold) result = result.filter(t => t.counterTechniques?.some(tech => tech.hold === 0))
     if (lastEvolution) result = result.filter(t => isLastEvolution(t))
     return result
   }, [temtem, temtemList, lastEvolution, hold, fullHP])
@@ -28,7 +28,7 @@ export default function OneShotList(props: Props) {
 
   return <div className="on-shot-list">
     <div className="one-shot-header">
-      Temtem oneshot:
+      Counter List:
     </div>
     <div>
       <div className="filter-header">Filter</div>
@@ -50,7 +50,7 @@ export default function OneShotList(props: Props) {
     <div className="one-shot-temtem-wrapper">
       {onShotTems.map(t => <div className="wrapper" key={t.number}>
         <TemtemAvatar temtem={t} />
-        {t.countTechs && t.countTechs.map(tech => <TechCard tech={tech} />)}
+        {t.counterTechniques && t.counterTechniques.map(tech => <TechCard tech={tech} />)}
       </div>
       )}
     </div>

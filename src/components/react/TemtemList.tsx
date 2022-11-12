@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import type { Temtem } from "../../ts"
 import type { RecursiveKeyOf } from "../../ts/recursiveKeyOf";
+import CounterList from "./CounterList";
 import OneShotList from "./OneShotList";
 import type { Operation } from "./QueryInputs";
 import QueryInputs from "./QueryInputs";
@@ -65,6 +66,9 @@ export default function TemtemList(props: Props) {
     </div>
     <div className="surface-2">
       {temtemSelected && <OneShotList temtemList={temtems} temtem={temtemSelected} />}
+    </div>
+    <div className="surface-2">
+      {temtemSelected && <CounterList temtemList={temtems} temtem={temtemSelected} />}
     </div>
     <div className="container">
       {temtemFiltered.map((temtem, index) =>

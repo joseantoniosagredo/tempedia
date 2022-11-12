@@ -120,6 +120,20 @@ function getDefType(tech: Technique | TechniquesEntity): "def" | "spdef" {
   return (tech as Technique).class === "Physical" ? "def" : "spdef";
 }
 
+export function getCounterTechniques(
+  temtemAtk: Temtem,
+  temtemDef: Temtem,
+  statsAtk: Partial<Stats> = {},
+  statsDef: Partial<Stats> = {},
+  delta = 0
+) {
+  const countTechs = temtemAtk.techniques?.filter(
+    (tech) =>
+      damageWithStat(temtemAtk, temtemDef, tech, statsAtk, statsDef) + delta >
+      calculateStat(temtemDef, "hp", 100, 50, statsDef?.hp)
+  );
+  return countTechs;
+}
 export function oneShotTemtems(
   temtem: Temtem,
   temtemList: Temtem[],
@@ -128,14 +142,29 @@ export function oneShotTemtems(
 ) {
   return temtemList
     .map((tem) => {
-      const countTech = temtem.techniques?.find(
-        (tech) =>
-          damageWithStat(temtem, tem, tech, statsAtk, stats) >
-          calculateStat(tem, "hp", 100, 50, stats?.hp)
-      );
-      return { ...tem, countTech };
+      const countTechs = getCounterTechniques(temtem, tem, statsAtk, stats);
+      return { ...tem, countTechs };
     })
-    .filter((e) => e.countTech);
+    .filter((e) => e.countTechs && e.countTechs.length > 0);
+}
+
+export function counterTemtems(
+  temtem: Temtem,
+  temtemList: Temtem[],
+  statsAtk: Partial<Stats> = {},
+  stats: Partial<Stats> = {}
+) {
+  return temtemList
+    .map((tem) => {
+      const counterTechniques = getCounterTechniques(
+        tem,
+        temtem,
+        statsAtk,
+        stats
+      );
+      return { ...tem, counterTechniques };
+    })
+    .filter((tem) => tem.counterTechniques && tem.counterTechniques.length > 0);
 }
 export function isLastEvolution(temtem: Temtem) {
   return (
