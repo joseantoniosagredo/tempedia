@@ -20,14 +20,13 @@ export default function (props: Props) {
     if (!selectedTemTem) return []
     const links1 = getMyWeakTemtemLinks(selectedTemTem, temtems).map(e => ({ ...e, deep: 0 }))
     const links2 = links1.map(({ target }) => getMyWeakTemtemLinks(target, temtems)).flat().map(e => ({ ...e, deep: 1 }))
-    console.log(links1, links2)
     return links1.concat(links2).map(({ source, target, deep }) => ({ source: source.number, target: target.number, deep }))
   }, [temtems, selectedTemTem])
 
   // Hooks
   const size = useObservableSize(wrapperRef)
   useEffect(() => {
-    d3LinkSimulation(svgRef.current, temtems, links, selected, (e: any, d: Temtem) => setSelected(d.number), size)
+    d3LinkSimulation(svgRef.current, temtems, links, selected, (e: any, d: Temtem) => d.number === selected ? setSelected(0) : setSelected(d.number), size)
   }, [temtems, setSelected, selected, links, size])
 
   return <div ref={wrapperRef} className="svg-wrapper">
