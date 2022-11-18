@@ -7,7 +7,10 @@ import type {
 
 function calculateHP(temtem: Temtem, level = 100, sv = 50, tv?: number) {
   return Math.trunc(
-    ((1.5 * temtem.stats.hp + sv + (tv ?? temtem.trainStats.hp) / 5) * level) /
+    ((1.5 * temtem.stats.hp +
+      sv +
+      (tv != null ? tv : temtem.trainStats.hp) / 5) *
+      level) /
       80 +
       (sv * temtem.stats.hp * level) / 20000 +
       level +
@@ -19,7 +22,7 @@ function calculateSTA(temtem: Temtem, level = 100, sv = 50, tv?: number) {
     temtem.stats.sta / 4 +
       Math.pow(level, 0.35) * 6 +
       (sv * temtem.stats.sta * level) / 20000 +
-      (sv * (tv ?? temtem.trainStats.sta) * level) / 30000
+      (sv * (tv != null ? tv : temtem.trainStats.sta) * level) / 30000
   );
 }
 function calculateOther(
@@ -30,7 +33,9 @@ function calculateOther(
   tv?: number
 ) {
   return Math.trunc(
-    ((1.5 * temtem.stats[stat] + sv + (tv ?? temtem.trainStats[stat]) / 5) *
+    ((1.5 * temtem.stats[stat] +
+      sv +
+      (tv != null ? tv : temtem.trainStats[stat]) / 5) *
       level) /
       80 +
       (sv * temtem.stats[stat] * level) / 20000 +
@@ -70,7 +75,7 @@ export function damageWithStat(
 ) {
   return (
     damage(
-      calculateStat(temtemAtk, getAtkType(tech)),
+      calculateStat(temtemAtk, getAtkType(tech), tvsAtk[getAtkType(tech)]),
       calculateStat(temtemDef, getDefType(tech)),
       tech.damage
     ) * getMultiplyArray(tech.type, temtemDef.types)
@@ -138,11 +143,18 @@ export function oneShotTemtems(
   temtem: Temtem,
   temtemList: Temtem[],
   statsAtk: Partial<Stats> = {},
-  stats: Partial<Stats> = {}
+  stats: Partial<Stats> = {},
+  delta = 0
 ) {
   return temtemList
     .map((tem) => {
-      const countTechs = getCounterTechniques(temtem, tem, statsAtk, stats);
+      const countTechs = getCounterTechniques(
+        temtem,
+        tem,
+        statsAtk,
+        stats,
+        delta
+      );
       return { ...tem, countTechs };
     })
     .filter((e) => e.countTechs && e.countTechs.length > 0);
@@ -151,16 +163,18 @@ export function oneShotTemtems(
 export function counterTemtems(
   temtem: Temtem,
   temtemList: Temtem[],
+  stats: Partial<Stats> = {},
   statsAtk: Partial<Stats> = {},
-  stats: Partial<Stats> = {}
-) {
+  delta = 0
+): (Temtem & { counterTechniques: Technique[] | undefined })[] {
   return temtemList
     .map((tem) => {
       const counterTechniques = getCounterTechniques(
         tem,
         temtem,
         statsAtk,
-        stats
+        stats,
+        delta
       );
       return { ...tem, counterTechniques };
     })
@@ -173,4 +187,44 @@ export function isLastEvolution(temtem: Temtem) {
       Math.max(max.stage, et.stage) === max.stage ? max : et
     ).stage === temtem.evolution.stage
   );
+}
+export function getLinks(
+  temtem: Temtem,
+  temtemList: Temtem[],
+  statsAtk: Partial<Stats> = {},
+  stats: Partial<Stats> = {},
+  delta = 0
+) {
+  const temtemsToAtk = oneShotTemtems(
+    temtem,
+    temtemList,
+    statsAtk,
+    stats,
+    delta
+  );
+  // const temtemsToDef = counterTemtems(temtem, temtemList, statsAtk, stats);
+  const atkLinks = temtemsToAtk.map((tem) => ({
+    source: temtem,
+    target: tem,
+  }));
+  // const defLinks = temtemsToDef.map((tem) => ({
+  //   atk: tem.number,
+  //   def: temtem.number,
+  // }));
+  return atkLinks;
+}
+
+export function getMyWeakTemtemLinks(
+  temtem: Temtem,
+  temtemList: Temtem[],
+  statsAtk: Partial<Stats> = {},
+  stats: Partial<Stats> = {},
+  delta = 0
+) {
+  const weakTems = counterTemtems(temtem, temtemList, statsAtk, stats, delta);
+  const weakTemtems = weakTems.map((tem) => ({
+    source: temtem,
+    target: tem,
+  }));
+  return weakTemtems;
 }

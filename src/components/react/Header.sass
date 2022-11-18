@@ -9,11 +9,16 @@
   padding: 0px 20px
   @include mobile
     height: 50px
-  .title
+  .titles
     flex: 1 1 100%
+    display: flex
+    gap: 10px
+    a
+      text-decoration: none
+      @include mobile
+        display: none
   .burguer-header
     height: 30px
     display: none
     @include mobile
       display: block
-  

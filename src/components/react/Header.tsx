@@ -10,9 +10,13 @@ function Header() {
     else body?.classList.add('open-header')
     setOpen(!open)
   }, [open, setOpen])
-  return <header onClick={OpenBurger} className="header">
-    <div className="title">Tempedia</div>
-    <Burguer open={open} className="burguer-header"/>
+  return <header className="header">
+    <div className="titles">
+      <div className="title">Tempedia</div>
+      <a href="/"><div className="title">home</div></a>
+      <a href='/analytics'><div className="title">Analytics</div></a>
+    </div>
+    <Burguer open={open} className="burguer-header" onClick={OpenBurger} />
   </header>
 }
 export default Header
