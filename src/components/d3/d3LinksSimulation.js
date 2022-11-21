@@ -9,7 +9,7 @@ export default function d3LinkSimulation (
   size = { width: 900, height: 900 }
 ) {
   console.log('draw')
-  const r = 15
+  // const r = 15
   const color = ['red', 'green']
   const svg = d3.select(svgref)
   const someLink = [
@@ -17,7 +17,22 @@ export default function d3LinkSimulation (
   ]
   const hasLink = tem =>
     tem.number === selected || someLink.includes(tem.number)
+  // Scales
+  let numberLinks = d3.group(links, l => l.target)
 
+  const scaleRadio = d3
+    .scaleLinear()
+    .range([15, 30])
+    .domain([
+      d3.min(numberLinks, ([_, value]) => value.length) || 0,
+      d3.max(numberLinks, ([_, value]) => value.length) || 1
+    ])
+    .clamp(true)
+  const scaleRadioFromTem = temtem => {
+    return scaleRadio(numberLinks.get(temtem.number)?.length || 0)
+  }
+
+  // Selects
   svg.attr('width', size.width).attr('height', size.height)
   var root = svg.selectAll('.root').data([null])
   root = root.merge(
@@ -27,7 +42,7 @@ export default function d3LinkSimulation (
       .attr('class', 'root')
   )
   root.attr('transform', `translate(${size.width / 2},${size.height / 2})`)
-  var defs = root.selectAll('.defs').data([null])
+  var defs = root.selectAll('.defs-wrapper').data([null])
   defs = defs.merge(
     defs
       .enter()
@@ -56,7 +71,8 @@ export default function d3LinkSimulation (
     .append('clipPath')
     .attr('class', 'clipPath')
     .attr('id', d => 'clip-' + d.number)
-  // const clipPathUpdate = clipPath.merge(clipPathEnter)
+
+  const clipPathUpdate = clipPath.merge(clipPathEnter)
   // definition images
   const items = circles.selectAll('.temtem').data(nodes, d => d.number)
   const itemsEnter = items
@@ -77,7 +93,8 @@ export default function d3LinkSimulation (
   const linkUpdate = link.merge(linkEnter)
 
   // ON ENTER
-  clipPathEnter.append('circle').attr('r', r)
+  clipPathEnter.append('circle').attr('r', 0)
+
   linkEnter
     .attr('opacity', 0)
     .attr('stroke', d => {
@@ -91,12 +108,17 @@ export default function d3LinkSimulation (
     .append('image')
     .attr('xlink:href', d => d.portraitWikiUrl)
     .attr('clip-path', d => `url(#clip-${d.number})`)
-    .attr('width', r * 2)
-    .attr('height', r * 2)
-    .attr('x', -r)
-    .attr('y', -r)
 
   //ON UPDATE
+  clipPathUpdate
+    .select('circle')
+    .transition()
+    .attr('r', function (t, e) {
+      if (scaleRadioFromTem(t) === 40)
+        console.log(t.name, scaleRadioFromTem(t), this)
+      return scaleRadioFromTem(t)
+    })
+
   itemsUpddate.on('click', (...args) => {
     simulation.alpha(0.4).restart()
     onClick(...args)
@@ -104,7 +126,13 @@ export default function d3LinkSimulation (
   itemsUpddate
     .transition()
     .attr('opacity', d => (selected ? (hasLink(d) ? 1 : 0.2) : 1))
-
+  itemsUpddate
+    .select('image')
+    .transition()
+    .attr('width', t => scaleRadioFromTem(t) * 2)
+    .attr('height', t => scaleRadioFromTem(t) * 2)
+    .attr('x', t => -scaleRadioFromTem(t))
+    .attr('y', t => -scaleRadioFromTem(t))
   // ON EXIT
   itemsExit
     .select('circle')
@@ -128,7 +156,10 @@ export default function d3LinkSimulation (
       // .distance(50)
     )
     .force('center', d3.forceCenter(0, 0))
-    .force('collide', d3.forceCollide(r + 1).iterations(4))
+    .force(
+      'collide',
+      d3.forceCollide(t => scaleRadioFromTem(t) + 1).iterations(4)
+    )
     .force('manybody', d3.forceManyBody())
     .force(
       'radial',
