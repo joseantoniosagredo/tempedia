@@ -1,13 +1,27 @@
 // import fonts
+@use "sass:map"
+@import './functions/elevation-color'
+@import './components/input'
+@import './components/button'
+@import './mixins/media-query'
+@import './mixins/m-font-size'
+@import './mixins/m-ellipsis'
 @import url(https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap)
+@import './variables'
+@import './temtem-type-color'
+@import './d3-styles'
+$surface-elevation: (1:0.05,2:0.07,3:.08,4:.09,6:.11,8:.12,12:.14,16:.15,24:.16)
+@mixin surface($elevation)
+  $opacity: map.get($surface-elevation,$elevation)
+  padding: 0.15rem
+  margin: 0.15rem
+  //background-color: var(--surface)
+  background-size: 400%
+  border-radius: 0.5rem
+  background-position: 100%
+  color: var(--on-surface)
+  background-color: elevation-color($elevation)
 
-// colors
-$primary-color: rgb(24, 198, 172)
-$secondary-color: rgb(24, 198, 172)
-$primary-color-dark: #02524C
-$text-color: #000
-
-$font-family: Roboto
-
-$nav-width:180px
-$header-height:40px
+@each $id, $opacity in $surface-elevation
+  .surface-#{$id}
+    @include surface($id)

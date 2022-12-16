@@ -1,0 +1,18 @@
+$temtem-color-crystal: #E94A67
+$temtem-color-digital: #5E7A7B
+$temtem-color-earth: #A77A5B
+$temtem-color-electric: #FDDD68
+$temtem-color-fire: #DF6240
+$temtem-color-melee: #DD9867
+$temtem-color-mental: #BB69BC
+$temtem-color-nature: #ABE76E
+$temtem-color-neutral: #E6F6F7
+$temtem-color-toxic: #474147
+$temtem-color-water: #7BE7F2
+$temtem-color-wind: #07F9B3
+
+$temtem-color-upla: (crystal:$temtem-color-crystal, digital:$temtem-color-digital, earth:$temtem-color-earth, electric:$temtem-color-electric, fire:$temtem-color-fire, melee:$temtem-color-melee, mental:$temtem-color-mental, nature:$temtem-color-nature, neutral:$temtem-color-neutral, toxic:$temtem-color-toxic, water:$temtem-color-water, wind:$temtem-color-wind)
+
+@each $name, $color in $temtem-color-upla
+  .background-color-#{$name}
+    background-color: $color

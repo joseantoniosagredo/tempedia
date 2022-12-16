@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import type { Temtem } from '../ts';
+import temtems from '../../public/api/temtems.json'
+import LinkSimulation from '../components/d3/LinkSimulation'
+import { isLastEvolution } from '../utils/temtemFunctions';
+// const response = await fetch('https://temtem-api.mael.tech/api/temtems')
+const data:Temtem[] = temtems.filter(t => isLastEvolution(t)) as unknown as Temtem[]
+const selected = data[3]
+---
+
+<Layout title="Analytics">
+	<main class="surface-1 analytics">
+		<h1 ><span class="text-gradient">{selected.name}</span></h1>	
+		<div class="links-wrapper surface-2">
+			<LinkSimulation client:load temtems={data} />
+		</div>
+	</main>
+</Layout>
+<style lang="sass">
+@import '../styles/theme'
+.analytics
+	.links-wrapper
+		@include mobile
+			height: 100vw
+		height:100vh
+</style>

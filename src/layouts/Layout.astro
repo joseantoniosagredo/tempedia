@@ -2,8 +2,18 @@
 export interface Props {
 	title: string;
 }
-
+import '../styles/theme.sass'
+import Header from '../components/react/Header'
+import MobileHeaderOptions from '../components/MobileHeaderOptions.astro';
 const { title } = Astro.props;
+const routes = [{
+  path:'/',
+  label:'Home',
+},
+{
+  path:'/analytics',
+  label: 'Analytics'
+}]
 ---
 
 <!DOCTYPE html>
@@ -16,20 +26,43 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		<slot />
+		<div class="body-wrapper" id="body-wrapper">
+      <Header client:load/>
+      <div class="body-container">
+        <slot />
+      </div>
+    </div>
+      <MobileHeaderOptions routes={routes}/>
 	</body>
 </html>
-<style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
+<style is:global lang="sass">
+@import "../styles/theme.sass"
+html
+  font-family: system-ui, sans-serif
+  background-color: var(--background)
+  color: var(--on-background)
+body
+  margin: 0px
+  overflow-x: hidden
+  .body-container
+    overflow: hidden
+  .body-wrapper
+    height: 100vh
+    width: 100vw
+    position: absolute
+    overflow-y: auto
+    z-index: 1
+    background-color: var(--background)
+    border-radius: 0px
+    transform-origin: top right
+    @include mobile
+      transition: all .2s ease-in-out
+    &.open-header
+      transform: translate(-70vw,5%) scale(.9)
+code
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace
+
+svg
+  text
+    fill: var(--on-background)
 </style>

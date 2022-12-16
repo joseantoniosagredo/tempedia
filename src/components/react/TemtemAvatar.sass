@@ -1,19 +1,32 @@
 @import '../../styles/mixins/media-query.sass'
 @import '../../styles/mixins/m-ellipsis'
-$size: 60px
+$size: 50px
+$size-mobile: 50px
 .temtem-avatar
   display: flex
   flex-direction: column
   align-items: center
   width: $size
+  padding: 0.15rem
+  cursor: pointer
+  @include mobile
+    width: $size-mobile
+  &:hover
+    .avatar
+      transform: scale(1.1)
+      border-color: var(--primary-color)
+  &.selected
+    .avatar
+      border-color: var(--secondary-color)
   .avatar
+    transition: all .2s ease-in-out
     width: $size
     height: $size
     border-radius: 100%
     border: 1px solid
     @include mobile
-      width: 50px
-      height: 50px
+      width: $size-mobile
+      height: $size-mobile
   .name
     width: 100%
     overflow: hidden

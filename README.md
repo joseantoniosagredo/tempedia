@@ -1,13 +1,34 @@
-# Welcome to [Astro](https://astro.build)
+# Welcome to [Tempedia](https://tempedia-five.vercel.app/
+## Introduction
+Temtem is MMO Game similar to Pokemon where some criatures (Temtems) have to combat each other.
+This webside is a place on we can see the "atack" and "defense" of each temtem and compare there.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
+## Development
+This project has been created with [Astro](https://astro.build/). I think this is perfect for i want for this webside because:
+* I don't need a backend. SSG is perect for this project.
+* Allow me to create a page with Markdown, Vue and React
+* It build weight is vey low
+* Compatible with Vercel
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### Technology used
+* Astro
+* React
+* Typescript
+* D3
 
-![basics](https://user-images.githubusercontent.com/4677417/186188965-73453154-fdec-4d6b-9c34-cb35c248ae5b.png)
+## Data from:
+* (Api from Maael)[https://temtem-api.mael.tech/]
+* Trained stats from (Tortelines Garden)[https://www.tortenites-garden.com/]
 
+### Future feature
+* Counter List
+* Filter by techniques
+* Sinergies
+* Compare
+* Advance Query in string mode
 
-## 🚀 Project Structure
+## Astro Readme
+### 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:
 
@@ -31,7 +52,7 @@ There's nothing special about `src/components/`, but that's where we like to put
 
 Any static assets, like images, can be placed in the `public/` directory.
 
-## 🧞 Commands
+### 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
 
@@ -44,6 +65,6 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`    | Run CLI commands like `astro add`, `astro preview` |
 | `npm run astro --help` | Get help using the Astro CLI                       |
 
-## 👀 Want to learn more?
+### 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

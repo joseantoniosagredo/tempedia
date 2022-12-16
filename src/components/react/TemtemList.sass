@@ -1,8 +1,28 @@
+@import '../../styles/theme'
 .temtem-list
   display: flex
   flex-direction: column
+
+  .header-filter
+    padding: 5px
+    border-radius: 5px
+    background-color: elevation-color(1)
+    .subtitle
+      font-size: .7em
+      color: #eee
+    .top
+      display: flex
+      align-items: center
+      gap: 5px
+      input
+        flex: 1 1 100%
+  .main
+    margin: 10px 0px
+  .inputs
+    display: flex
   .container
     display: flex
     flex-wrap: wrap
+    justify-content: center
     >.temtem-avatar
       margin: 5px 5px

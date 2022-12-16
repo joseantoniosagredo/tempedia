@@ -1,28 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
 import type { Temtem } from '../ts';
 import TemtemList from '../components/react/TemtemList';
+import temtems from '../../public/api/temtems.json'
 
-const response = await fetch('https://temtem-api.mael.tech/api/temtems')
-const data:Temtem[] = await response.json()
+// const response = await fetch('https://temtem-api.mael.tech/api/temtems')
+const data:Temtem[] = temtems as unknown as Temtem[]
 ---
 
 <Layout title="Tempedia">
-	<main>
-		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
-		<p class="instructions">
-			To get started, open the directory <code>src/pages</code> in your project.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-		</p>
+	<main class="surface-1">
+		<h1 >Welcome to <span class="text-gradient">Tempedia</span></h1>	
 		<TemtemList client:load temtems={data}/>
 	</main>
 </Layout>
 <style lang="sass">
 main
-	margin: auto
-	padding: 1.5rem
-	max-width: 60ch
+	margin: auto !important
+	padding: 1.5rem !important
+	max-width: 80ch
 	.wrapper
 		display: flex
 		flex-wrap: wrap
@@ -45,7 +41,6 @@ main
 		line-height: 1.6
 		margin: 1rem 0
 		border: 1px solid rgba(var(--accent), 25%)
-		background-color: white
 		padding: 1rem
 		border-radius: 0.4rem
 

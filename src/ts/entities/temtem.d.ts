@@ -1,14 +1,17 @@
+import type { Technique } from "./technique";
+
 export interface Temtem {
   number: number;
   name: string;
-  types?: string[] | null;
+  types: TemtemType[];
   portraitWikiUrl: string;
   lumaPortraitWikiUrl: string;
   wikiUrl: string;
   stats: Stats;
+  trainStats: Stats;
   traits?: string[] | null;
   details: Details;
-  techniques?: TechniquesEntity[] | null;
+  techniques?: Technique[] | null;
   trivia?: string[] | null;
   evolution: Evolution;
   wikiPortraitUrlLarge: string;
@@ -40,6 +43,19 @@ export interface Stats {
   spdef: number;
   total: number;
 }
+export type TemtemType =
+  | "Toxic"
+  | "Crystal"
+  | "Melee"
+  | "Digital"
+  | "Mental"
+  | "Electric"
+  | "Nature"
+  | "Fire"
+  | "Water"
+  | "Earth"
+  | "Wind"
+  | "Neutral";
 export interface Details {
   height: Height;
   weight: Weight;
@@ -58,8 +74,43 @@ export interface TechniquesEntity {
   levels: number;
 }
 export interface Evolution {
+  stage: number;
+  evolutionTree?: EvolutionTreeEntity[] | null;
   evolves: boolean;
+  type: string;
+  from: From;
+  to?: null;
+  number: number;
+  name: string;
+  level: number;
+  trading: boolean;
+  traits?: string[] | null;
+  traitMapping: TraitMapping;
 }
+export interface EvolutionTreeEntity {
+  stage: number;
+  number: number;
+  name: string;
+  level: number;
+  type: string;
+  trading: boolean;
+  traits?: string[] | null;
+  traitMapping: TraitMapping;
+}
+export interface TraitMapping {
+  [key: string]: string;
+}
+export interface From {
+  stage: number;
+  number: number;
+  name: string;
+  level: number;
+  type: string;
+  trading: boolean;
+  traits?: string[] | null;
+  traitMapping: TraitMapping;
+}
+
 export interface LocationsEntity {
   location: string;
   place: string;

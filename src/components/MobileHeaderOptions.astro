@@ -1,0 +1,53 @@
+---
+interface Props {
+  routes:{path:string,label:string}[]
+}
+const { routes } = Astro.props;
+import instagram from '../assets/icons/instagram.png'
+---
+<div class="fixed-header-mobile">
+  <div class="menu-header">
+    <h2>Index</h2> 
+  </div>
+  <div class="options-container">
+    <ul>
+      {routes.map(opt => <a href={opt.path}><li>{opt.label}</li></a>)}
+    </ul>
+  </div>
+  <div class="social-media">
+    <img class="icon" src={instagram} alt="instagram">
+  </div>
+</div>
+<style lang="sass">
+  $padding: 20px
+.fixed-header-mobile
+  position: fixed
+  z-index: -1
+  top:0
+  left: 0
+  width: 100vw
+  height: 100vh
+  background-color: var(--secondary-color-dark)
+  .menu-header
+    padding: $padding
+  .options-container
+    text-align: right
+    padding: $padding
+    ul
+      list-style-type: none
+      font-size: 2em
+      li
+        &:hover
+          color: var(--primery-color)
+  .social-media
+    display: flex
+    justify-content: right
+    padding: $padding
+    .icon
+      width: 30px
+      height: 30px
+
+    
+  
+
+</style>
